@@ -12,16 +12,20 @@ const parseString = (s) => {
         if (!m) throw new Error('Wrong syntax, please use "Name" on "Date"');
 
         const date = m[1] // 8 novembre 2021
-        const from = m[2] // 18:00
-        const to = m[3]   // 18:45
+        const fromTime= m[2] // 18:00
+        const toTime = m[3]   // 18:45
 
         // parse provided string date into dayjs if possible
-        const parsedDate = dayjs(`${date}`, ['D MMMM YYYY', 'D MMM YYYY'], 'fr', true)
+        const parsedDate = dayjs(`${date}`, ['D MMMM YYYY', 'D MMM YYYY'], 'fr', true);
         if (!parsedDate.isValid()) throw new Error('Date is not valid');
-
+        
+        const formattedDate = parsedDate.format('YYYY-MM-DD');
         // return object with date, start and end time
         return { 
-            date: parsedDate, from, to
+            date: parsedDate, 
+            fromDateTime: dayjs(`${formattedDate} ${fromTime}`).format(),
+            toDateTime: dayjs(`${formattedDate} ${toTime}`).format(),
+            tz: "Europe/Paris"
         }
     } catch(e) {
         console.log(`Error in parseString: ${e}`)

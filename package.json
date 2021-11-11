@@ -22,6 +22,9 @@
     "@serverless-stack/cli": "0.50.2",
     "@serverless-stack/resources": "0.50.2",
     "dayjs": "^1.10.7",
+    "google-auth-library": "^7.10.2",
+    "googleapis": "^91.0.0",
+    "ics": "^2.31.0",
     "mailparser": "^3.4.0"
   }
 }
