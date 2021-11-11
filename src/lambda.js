@@ -1,6 +1,7 @@
 import { parseString } from './lib/utils';
 import { extractMail } from './lib/mail';
-import { addEvent, testEvent, createIcs } from './lib/calendar';
+import { createIcs } from './lib/calendar';
+// import { addEvent, testEvent, createIcs } from './lib/calendar';
 
 export async function handler(event) {
   console.log(`${new Date}`);
