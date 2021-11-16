@@ -11,6 +11,6 @@ module.exports.googleAuth = () => {
         });
         return jwt;
     } catch (error) {
-        console.log(`AUTH: ${error}`)
+        console.error(`𐄂 Error while authenticating: ${error}`);
     }
 };

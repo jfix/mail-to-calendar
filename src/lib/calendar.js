@@ -4,11 +4,6 @@ import dayjs from 'dayjs';
 import ics from 'ics';
 
 /**
- * create ics
- * 
- */
-
-/**
  * Create an event based on the data object in the calendar.
  * 
  * @param {Object} data containing startTimeDate, endTimeDate and event title
@@ -28,7 +23,6 @@ import ics from 'ics';
                 timeZone: data.tz
             }
         };
-
         const calendar = google.calendar({
             version: 'v3', 
             auth: googleAuth()
@@ -37,9 +31,10 @@ import ics from 'ics';
             calendarId: process.env.CALENDAR_ID,
             requestBody: event
         });
+        console.log(`✔️ Event successfully added to Google calendar.`);
         return true;
     } catch (error) {
-        console.log('ERROR in addEvent: ' + error)
+        console.error(`𐄂 Error adding event to Google calendar: ${error}`);
         return false;
     }
 };
@@ -68,37 +63,42 @@ const testEvent = async (data) => {
         let result = false;
         items.filter((e) => {
             if (e.summary == data.title) {
-                console.log(`Existing event found!: ${e.summary}`);
+                console.log(`𐄂 Existing event found!: ${e.summary}`);
                 result = true;
             } else {
-                console.log(`Different event found: ${e.summary}`);
+                console.log(`✔️ Different event found: ${e.summary}`);
             }
         })
         return result;
     } catch (error) {
-        console.log('ERROR in testEvent: ' + error)
+        console.error(`𐄂 Error testing calendar event: ${error}`);
     }
 };
 
+/**
+ * Create an ICS compliant string and return it
+ * @param {Object} data 
+ * @returns String containing an ICS calendar event
+ */
 const createIcs = (data) => {
-    const start = dayjs(data.fromDateTime).format('YYYY-M-D-H-m').split('-').map(i => parseInt(i));
-    const end = dayjs(data.fromDateTime).format('YYYY-M-D-H-m').split('-').map(i => parseInt(i));
-    const event = {
-        start,
-        end,
-        title: data.title,
-        productId: "Squash Calendar Event",
-        busyStatus: "BUSY",
-    }
-    let icsString;
-    ics.createEvent(event, (err, res) => {
-        if (err) {
-            console.log(`ERROR in ICS CREATE: ${JSON.stringify(err, null, 2)}`)
+    try {
+        const start = dayjs(data.fromDateTime).format('YYYY-M-D-H-m').split('-').map(i => parseInt(i));
+        const end = dayjs(data.toDateTime).format('YYYY-M-D-H-m').split('-').map(i => parseInt(i));
+        const event = {
+            start,
+            end,
+            title: data.title,
+            productId: "Squash Calendar Event",
+            busyStatus: "BUSY",
         }
-        console.log(`ICS STRING: ${res}`);
-        icsString = res;
-    });
-    return icsString;
+        let icsString;
+        ics.createEvent(event, (err, res) => {
+            icsString = res;
+        });
+        return icsString;
+    } catch (error) {
+        console.error(`𐄂 Error while creating ICS event: ${JSON.stringify(error, null, 2)}`)
+    }
 };
 
 module.exports = {
