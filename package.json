@@ -19,12 +19,16 @@
   },
   "dependencies": {
     "@aws-cdk/core": "1.126.0",
+    "@aws-sdk/client-ses": "^3.41.0",
     "@serverless-stack/cli": "0.50.2",
     "@serverless-stack/resources": "0.50.2",
+    "@slack/web-api": "^6.5.0",
     "dayjs": "^1.10.7",
     "google-auth-library": "^7.10.2",
     "googleapis": "^91.0.0",
+    "got": "^11.8.2",
     "ics": "^2.31.0",
-    "mailparser": "^3.4.0"
+    "mailparser": "^3.4.0",
+    "nodemailer": "^6.7.0"
   }
 }
