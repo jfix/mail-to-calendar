@@ -6,7 +6,7 @@ dayjs.extend(customParseFormat);
 const parseString = (s) => {
     try {
         // should match: Lun.  8 novembre 2021 de 18:00 à 18:45
-        const re = /\.\s+(\d+ [a-z]+ \d{4}) de (\d+:\d+) à (\d+:\d+)/
+        const re = /\.\s+(\d+\s+[\p{L}]+ \d{4}) de (\d+:\d+) à (\d+:\d+)/u
         const m = s.match(re);
         // [".  8 novembre 2021 de 18:00 à 18:45", "8 novembre 2021", "18:00", "18:45"] (4) 
         if (!m) throw new Error(`Couldn't extract date from provided string.`);
