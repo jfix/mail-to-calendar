@@ -16,8 +16,10 @@ export async function handler(event) {
     const title = "Squash at St Cloud";
     const eventData = {
       ...dateTime,
-      title
-    }
+      title,
+      tz: "Europe/Paris"
+    };
+
     // test in calendar for existing event, otherwise add it
     const eventExists = await testEvent(eventData);
     if (!eventExists) {
