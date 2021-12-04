@@ -13,7 +13,7 @@ export async function handler(event) {
     // attempt to find date and from/to times
     const dateTime = parseString(message);
     // prepare some data we need
-    const title = `Squash at St Cloud <3 (v${process.env.SCRIPT_VERSION})`;
+    const title = `Squash at St Cloud <<3 (v${process.env.SCRIPT_VERSION})`;
     const eventData = {
       ...dateTime,
       title

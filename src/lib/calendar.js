@@ -88,6 +88,7 @@ const createIcs = (data) => {
             title: data.title,
             productId: "Squash Calendar Event",
             busyStatus: "BUSY",
+            classification: "PRIVATE",
         }
         let icsString;
         ics.createEvent(event, (err, res) => {
