@@ -13,13 +13,12 @@ export async function handler(event) {
     // attempt to find date and from/to times
     const dateTime = parseString(message);
     // prepare some data we need
-    const title = "Squash at St Cloud";
+    const title = `Squash at St Cloud <3 (v${process.env.SCRIPT_VERSION})`;
     const eventData = {
       ...dateTime,
-      title,
-      tz: "Europe/Paris"
+      title
     };
-
+    console.log(`  Times extracted: ${eventData.fromDateTime}-${eventData.toDateTime}`);
     // test in calendar for existing event, otherwise add it
     const eventExists = await testEvent(eventData);
     if (!eventExists) {

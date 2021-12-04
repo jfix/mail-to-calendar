@@ -13,9 +13,9 @@ export default function main(app) {
       SLACK_USER_TOKEN: ssm.StringParameter.valueForStringParameter(stack, "/squash/SLACK_USER_TOKEN"),
       SLACK_CHANNEL: ssm.StringParameter.valueForStringParameter(stack, "/squash/SLACK_CHANNEL"),
       EMAIL_RECIPIENTS: ssm.StringParameter.valueForStringParameter(stack, "/squash/EMAIL_RECIPIENTS"),
+      SCRIPT_VERSION: process.env.npm_package_version,
     }
   }));
-
   new MyStack(app, "my-stack");
 
   // Add more stacks

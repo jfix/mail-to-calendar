@@ -16,11 +16,9 @@ import ics from 'ics';
             summary: data.title,
             start: {
                 dateTime: data.fromDateTime,
-                timeZone: data.tz
             },
             end: {
                 dateTime: data.toDateTime,
-                timeZone: data.tz
             }
         };
         const calendar = google.calendar({

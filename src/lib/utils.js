@@ -1,7 +1,11 @@
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import 'dayjs/locale/fr';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+dayjs.extend(utc);
 dayjs.extend(customParseFormat);
+dayjs.extend(timezone)
 
 const parseString = (s) => {
     try {
@@ -20,13 +24,13 @@ const parseString = (s) => {
         if (!parsedDate.isValid()) throw new Error('Date is not valid');
         
         const formattedDate = parsedDate.format('YYYY-MM-DD');
-        console.log(`✔️ Extracted date and time from string.`)
+        console.log(`✔️ Extracted date and time from string: ${date}, ${fromTime}-${toTime}`);
         // return object with date, start and end time
-        return { 
+        return {
             date: parsedDate, 
-            fromDateTime: dayjs(`${formattedDate} ${fromTime}`).format(),
-            toDateTime: dayjs(`${formattedDate} ${toTime}`).format(),
-            tz: "Europe/Paris"
+            // TODO: improve how timezones are handled, don't hardcode
+            fromDateTime: dayjs.tz(`${formattedDate} ${fromTime}`, "Europe/Paris").utc().format(),
+            toDateTime: dayjs.tz(`${formattedDate} ${toTime}`, "Europe/Paris").utc().format(),
         }
     } catch(e) {
         console.error(`𐄂 Error in parseString: ${e}`);
